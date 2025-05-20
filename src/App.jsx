@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 
 function App() {
   const [search, setSearch] = useState('')
@@ -9,7 +10,17 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    getData()
     console.log('cliccato')
+  }
+
+  const getData = () => {
+    const searchValue = search
+
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=98e906b1055207ca319b06893208305a&query=${searchValue}`).then(res => {
+      console.log(searchValue)
+      console.log(res.data.results)
+    })
   }
 
   return (
