@@ -44,7 +44,7 @@ function App() {
 
         {/* --------------------------------------------------ELENCO FILM */}
         <h2 className="mb-3 fw-semibold">Movies</h2>
-        <div className="mb-5">
+        <div className="mb-5 row">
           {!movieData
             ? ''
             : movieData.map(elem => {
@@ -56,7 +56,7 @@ function App() {
 
         {/* --------------------------------------------------ELENCO SERIE TV */}
         <h2 className="mb-3 fw-semibold">TV Series</h2>
-        <div className="mb-5">
+        <div className="mb-5 row">
           {!tvData
             ? ''
             : tvData.map(elem => {
