@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import MovieCard from "./components/MovieCard"
 import TvCard from "./components/TvCard"
+import NavBar from "./components/NavBar"
 
 function App() {
   const [search, setSearch] = useState('')
@@ -35,13 +36,9 @@ function App() {
 
   return (
     <>
-      <div className="container p-5">
-        {/* ------------------------------------------------INPUT SEARCH */}
-        <form onSubmit={handleSubmit} className="input-group mb-5">
-          <input type="text" className="form-control" placeholder="Search..." onChange={handleChange} />
-          <button type="submit" className="btn btn-danger">Search</button>
-        </form>
+      <NavBar submit={handleSubmit} change={handleChange} />
 
+      <div className="container p-5">
         {/* --------------------------------------------------ELENCO FILM */}
         <h2 className="mb-3 fw-semibold">Movies</h2>
         <div className="mb-5 row">
