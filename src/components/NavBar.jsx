@@ -2,7 +2,7 @@ import React from 'react'
 
 const NavBar = ({ submit, change }) => {
     return (
-        <nav className="bg-dark" data-bs-theme="dark">
+        <nav className="bg-dark fixed-top shadow" data-bs-theme="dark">
             <div className="container-fluid d-flex justify-content-between align-items-center py-2">
 
                 <div className="bebas text-danger fs-3">Boolflix</div>

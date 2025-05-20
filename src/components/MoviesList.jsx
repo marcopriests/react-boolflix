@@ -4,7 +4,7 @@ import MovieCard from './MovieCard'
 const MoviesList = ({ movies }) => {
     return (
         <>
-            <h2 className="mb-3 fw-semibold">Movies</h2>
+            <h5 className="mb-3 fw-bold text-uppercase text-light">Movies</h5>
             <div className="row g-2">
                 {!movies
                     ? ''

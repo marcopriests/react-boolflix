@@ -39,15 +39,16 @@ function App() {
   return (
     <>
       <NavBar submit={handleSubmit} change={handleChange} />
+      <div className="bg-dark">
+        <div className="container-xl mt-5 p-5">
 
-      <div className="container p-5">
+          <MoviesList movies={movieData} />
 
-        <MoviesList movies={movieData} />
+          <hr className="my-5" />
 
-        <hr className="my-5" />
+          <TvList tv={tvData} />
 
-        <TvList tv={tvData} />
-
+        </div>
       </div>
     </>
   )
