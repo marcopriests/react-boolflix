@@ -3,6 +3,8 @@ import axios from "axios"
 import MovieCard from "./components/MovieCard"
 import TvCard from "./components/TvCard"
 import NavBar from "./components/NavBar"
+import MoviesList from "./components/MoviesList"
+import TvList from "./components/TvList"
 
 function App() {
   const [search, setSearch] = useState('')
@@ -39,27 +41,13 @@ function App() {
       <NavBar submit={handleSubmit} change={handleChange} />
 
       <div className="container p-5">
-        {/* --------------------------------------------------ELENCO FILM */}
-        <h2 className="mb-3 fw-semibold">Movies</h2>
-        <div className="mb-5 row">
-          {!movieData
-            ? ''
-            : movieData.map(elem => {
-              return <MovieCard movie={elem} key={elem.id} />
-            })}
-        </div>
+
+        <MoviesList movies={movieData} />
 
         <hr className="my-5" />
 
-        {/* --------------------------------------------------ELENCO SERIE TV */}
-        <h2 className="mb-3 fw-semibold">TV Series</h2>
-        <div className="mb-5 row">
-          {!tvData
-            ? ''
-            : tvData.map(elem => {
-              return <TvCard tv={elem} key={elem.id} />
-            })}
-        </div>
+        <TvList tv={tvData} />
+
       </div>
     </>
   )

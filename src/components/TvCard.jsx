@@ -15,15 +15,20 @@ const TvCard = ({ tv }) => {
 
     }
     return (
-        <div className='col-6 col-md-4 col-lg-3 mb-3'>
-            <div className="card">
-                <img src={`https://image.tmdb.org/t/p/original${tv.poster_path}`} alt="Image not found" className="card-img-top" />
-                <div className="card-body">
-                    <ul className="list-group list-group-flush mb-3">
-                        <li className="list-group-item"><h4 className="fw-semibold">{tv.name}</h4></li>
-                        <li className="list-group-item"><h5 className="fw-semibold fst-italic">{tv.original_name}</h5></li>
-                        <li className="list-group-item"><i className={`fi fi-${lang}`}></i></li>
-                        <li className="list-group-item fw-semibold">{stars}</li>
+        <div className='col-4 col-md-3 col-lg-2'>
+            <div className="card rounded-0 border-0">
+                <img src={tv.poster_path
+                    ? `https://image.tmdb.org/t/p/original${tv.poster_path}`
+                    : 'https://placehold.co/200x300'}
+                    alt={tv.name} className="card-image rounded-0" />
+
+                <div className="card-info">
+                    <ul className="text-light p-3">
+                        <li className="list-group-item"><b>Title: </b>{tv.name}</li>
+                        <li className="list-group-item"><b>Original title: </b>{tv.original_name}</li>
+                        <li className="list-group-item fw-semibold"><b>Rating: </b>{stars}</li>
+                        <li className="list-group-item"><b>Original language: </b><i className={`fi fi-${lang}`}></i></li>
+                        <li className="list-group-item"><b>Overview: </b>{tv.overview}</li>
                     </ul>
                 </div>
             </div>
