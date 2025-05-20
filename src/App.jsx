@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import MovieCard from "./components/MovieCard"
 
 function App() {
   const [search, setSearch] = useState('')
@@ -35,12 +36,7 @@ function App() {
         {!data
           ? <div>Nothing to show...</div>
           : data.map(elem => {
-            return <ul className="list-group list-unstyled mb-3" key={elem.id}>
-              <li className="list-group-item"><h4 className="fw-semibold">{elem.title}</h4></li>
-              <li className="list-group-item"><h5 className="fw-semibold fst-italic">{elem.original_title}</h5></li>
-              <li className="list-group-item">{elem.original_language}</li>
-              <li className="list-group-item fw-semibold">{elem.vote_average}</li>
-            </ul>
+            return <MovieCard movie={elem} key={elem.id} />
           })}
       </div>
     </>
