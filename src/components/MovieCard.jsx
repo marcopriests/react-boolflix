@@ -1,6 +1,29 @@
-import React from 'react'
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const MovieCard = ({ movie }) => {
+    const [cast, setCast] = useState([])
+    const [genres, setGenres] = useState([])
+
+    const getCast = () => {
+        axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=98e906b1055207ca319b06893208305a`).then(res => {
+            setCast(res.data.cast)
+        })
+    }
+
+    const getGenres = () => {
+        axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=98e906b1055207ca319b06893208305a`).then(res => {
+            setGenres(res.data.genres)
+        })
+    }
+
+    useEffect(() => {
+        getCast()
+        getGenres()
+    }, [])
+
+    const showCast = cast ? cast.slice(0, 5) : []
+
     const lang = movie.original_language == 'en' ? 'gb' : movie.original_language
 
     const vote = Math.round(movie.vote_average / 2)
@@ -15,7 +38,7 @@ const MovieCard = ({ movie }) => {
 
     }
     return (
-        <div className='col-4 col-md-3 col-lg-2'>
+        <div className='col-4 col-md-3 col-lg-2 col-xxl-1'>
             <div className="card rounded-0 border-0">
                 <img src={movie.poster_path
                     ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
@@ -28,6 +51,18 @@ const MovieCard = ({ movie }) => {
                         <li className="list-group-item"><b>Original title: </b>{movie.original_title}</li>
                         <li className="list-group-item fw-semibold"><b>Rating: </b>{stars}</li>
                         <li className="list-group-item"><b>Original language: </b><i className={`fi fi-${lang}`}></i></li>
+                        <li className="list-group-item"><b>Cast: </b>
+                            {showCast.map((act, i) => {
+                                let punteggiatura = i != showCast.length - 1 ? ', ' : '.'
+                                return `${act.name}${punteggiatura}`
+                            })}
+                        </li>
+                        <li className="list-group-item"><b>Genres: </b>
+                            {genres.map((genre, i) => {
+                                let punteggiatura = i != genres.length - 1 ? ', ' : '.'
+                                return `${genre.name}${punteggiatura}`
+                            })}
+                        </li>
                         <li className="list-group-item"><b>Overview: </b>{movie.overview}</li>
                     </ul>
                 </div>

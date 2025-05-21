@@ -1,4 +1,5 @@
-import React from 'react'
+import { useState, useEffect } from "react"
+import axios from "axios"
 
 const TvCard = ({ tv }) => {
     const lang = tv.original_language == 'en' ? 'gb' : tv.original_language
@@ -15,7 +16,7 @@ const TvCard = ({ tv }) => {
 
     }
     return (
-        <div className='col-4 col-md-3 col-lg-2'>
+        <div className='col-4 col-md-3 col-lg-2 col-xxl-1'>
             <div className="card rounded-0 border-0">
                 <img src={tv.poster_path
                     ? `https://image.tmdb.org/t/p/original${tv.poster_path}`

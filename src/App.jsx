@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import axios from "axios"
 import MovieCard from "./components/MovieCard"
 import TvCard from "./components/TvCard"
 import NavBar from "./components/NavBar"
 import MoviesList from "./components/MoviesList"
 import TvList from "./components/TvList"
+import ApiContext from './contexts/ApiContext'
 
 function App() {
   const [search, setSearch] = useState('')
@@ -38,18 +39,20 @@ function App() {
 
   return (
     <>
-      <NavBar submit={handleSubmit} change={handleChange} />
-      <div className="bg-dark">
-        <div className="container-xl mt-5 p-5">
+      <ApiContext.Provider value={{ search, movieData, tvData, handleSubmit, handleChange }}>
+        <NavBar />
+        <div className="bg-dark">
+          <div className="mt-5 p-5">
 
-          <MoviesList movies={movieData} />
+            <MoviesList movies={movieData} />
 
-          <hr className="my-5" />
+            <hr className="my-5" />
 
-          <TvList tv={tvData} />
+            <TvList tv={tvData} />
 
+          </div>
         </div>
-      </div>
+      </ApiContext.Provider>
     </>
   )
 }
