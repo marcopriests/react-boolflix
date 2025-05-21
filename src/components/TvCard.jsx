@@ -2,6 +2,28 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 const TvCard = ({ tv }) => {
+    const [cast, setCast] = useState([])
+    const [genres, setGenres] = useState([])
+
+    const getCast = () => {
+        axios.get(`https://api.themoviedb.org/3/tv/${tv.id}/credits?api_key=98e906b1055207ca319b06893208305a`).then(res => {
+            setCast(res.data.cast)
+        })
+    }
+
+    const getGenres = () => {
+        axios.get(`https://api.themoviedb.org/3/tv/${tv.id}?api_key=98e906b1055207ca319b06893208305a`).then(res => {
+            setGenres(res.data.genres)
+        })
+    }
+
+    useEffect(() => {
+        getCast()
+        getGenres()
+    }, [])
+
+    const showCast = cast ? cast.slice(0, 5) : []
+
     const lang = tv.original_language == 'en' ? 'gb' : tv.original_language
 
     const vote = Math.round(tv.vote_average / 2)
@@ -29,6 +51,18 @@ const TvCard = ({ tv }) => {
                         <li className="list-group-item"><b>Original title: </b>{tv.original_name}</li>
                         <li className="list-group-item fw-semibold"><b>Rating: </b>{stars}</li>
                         <li className="list-group-item"><b>Original language: </b><i className={`fi fi-${lang}`}></i></li>
+                        <li className="list-group-item"><b>Cast: </b>
+                            {showCast.map((act, i) => {
+                                let punteggiatura = i != showCast.length - 1 ? ', ' : '.'
+                                return `${act.name}${punteggiatura}`
+                            })}
+                        </li>
+                        <li className="list-group-item"><b>Genres: </b>
+                            {genres.map((genre, i) => {
+                                let punteggiatura = i != genres.length - 1 ? ', ' : '.'
+                                return `${genre.name}${punteggiatura}`
+                            })}
+                        </li>
                         <li className="list-group-item"><b>Overview: </b>{tv.overview}</li>
                     </ul>
                 </div>
